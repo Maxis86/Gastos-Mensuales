@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Login = () => {
+export const Meses = () => {
     return (
         <div>
-            <h1>Desde Login</h1>
+            <h1>Desde Meses</h1>
         </div>
     )
 }
