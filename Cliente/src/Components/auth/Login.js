@@ -1,10 +1,30 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import InputAdornment from '@mui/material/InputAdornment';
+import LockIcon from '@mui/icons-material/Lock';
+import EmailIcon from '@mui/icons-material/Email';
+import Typography from '@mui/material/Typography'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  root: {
+    marginTop: 30,
+    display: 'block',
+    opacity: .7,
+    color: 'blue',
+  },
+});
+
 
 export const Login = () => {
+
+  const classes = useStyles();
+
   //Variable Usuario
   const [usuario, guardarUsuario] = useState({
     email: "",
@@ -35,12 +55,12 @@ export const Login = () => {
       <Box
         component="form"
         sx={{
-          m: 20, 
+          m: 5, 
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          "& .MuiTextField-root": { m: 1, width: "30ch" },
+          "& .MuiTextField-root": { m: 1, width: "40ch" },
           color: "secondary",
           "& fieldset": {
             borderColor: "blue",
@@ -51,10 +71,15 @@ export const Login = () => {
         noValidate
         autoComplete="off"
       >
-        <h1>Desde Login</h1>
+        <AccountCircleIcon color="primary" sx={{ fontSize: 150 }}/>
+
+        <Typography variant="h2" color="secundary" aling='center' paragraph>
+          Logín
+        </Typography>
 
         <form>
-          <div style={{ width: "100%" }}>
+          <Box>
+            
             <TextField
               name="email"
               id="email"
@@ -64,8 +89,11 @@ export const Login = () => {
               value={email}
               onChange={onChange}
               color="secondary"
+              InputProps={{
+                startAdornment: <InputAdornment position="start"><EmailIcon/></InputAdornment>,
+              }}
             />
-          </div>
+          </Box>
 
           <div>
             <TextField
@@ -77,6 +105,9 @@ export const Login = () => {
               value={password}
               onChange={onChange}
               color="secondary"
+              InputProps={{
+                startAdornment: <InputAdornment position="start"><LockIcon/></InputAdornment>,
+              }}
             />
           </div>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -87,7 +118,8 @@ export const Login = () => {
           
         </form>
 
-        <Link to={"/nueva-cuenta"}>Registrarse</Link>
+        <Link to={"/nueva-cuenta"} className={classes.root} >Registrarse</Link>
+      
       </Box>
     
   );

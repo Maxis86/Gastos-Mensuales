@@ -4,9 +4,28 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import LockIcon from "@mui/icons-material/Lock";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import Typography from '@mui/material/Typography'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { makeStyles } from '@mui/styles';
 
+const useStyles = makeStyles({
+  root: {
+    marginTop: 30,
+    display: 'block',
+    opacity: .7,
+    color: 'blue',
+  },
+});
 
 export const NuevaCuenta = () => {
+
+  const classes = useStyles();
+
+
   //Variable Usuario
   const [usuario, guardarUsuario] = useState({
     nombre: "",
@@ -28,25 +47,24 @@ export const NuevaCuenta = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     //Validar que no haya campos vacios
 
     //Otras validaciónes del password, que sean iguales
 
     //Pasarlo al Action
-
   };
 
   return (
     <Box
       component="form"
       sx={{
-        m: 20,
+        m: 5,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        "& .MuiTextField-root": { m: 1, width: "30ch" },
+        "& .MuiTextField-root": { m: 1, width: "40ch" },
         color: "secondary",
         "& fieldset": {
           borderColor: "blue",
@@ -56,10 +74,13 @@ export const NuevaCuenta = () => {
       noValidate
       autoComplete="off"
     >
-      <h1>Registrarse</h1>
+      <AccountCircleIcon color="primary" sx={{ fontSize: 150 }} />
+
+      <Typography variant="h2" color="secundary" aling="center" paragraph>
+        Registrarse
+      </Typography>
 
       <form>
-
         <div style={{ width: "100%" }}>
           <TextField
             name="nombre"
@@ -70,6 +91,13 @@ export const NuevaCuenta = () => {
             value={nombre}
             onChange={onChange}
             color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </div>
 
@@ -83,6 +111,13 @@ export const NuevaCuenta = () => {
             value={email}
             onChange={onChange}
             color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </div>
 
@@ -96,6 +131,13 @@ export const NuevaCuenta = () => {
             value={password}
             onChange={onChange}
             color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </div>
 
@@ -109,6 +151,13 @@ export const NuevaCuenta = () => {
             value={confirmar}
             onChange={onChange}
             color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </div>
 
@@ -119,7 +168,7 @@ export const NuevaCuenta = () => {
         </Box>
       </form>
 
-      <Link to={"/"}>Ir a Logín</Link>
+      <Link to={"/"} className={classes.root}>Ir a Logín</Link>
     </Box>
   );
 };
