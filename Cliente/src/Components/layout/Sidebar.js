@@ -29,7 +29,10 @@ export const Sidebar = () => {
         variant="permanent"
         anchor="left"
       >
-        <NuevoMes />
+        <NuevoMes 
+          
+          
+         />
 
         <ListadoMeses />
 

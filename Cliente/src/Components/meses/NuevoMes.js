@@ -1,48 +1,60 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 
-import mesContext from '../../context/meses/mesContext'
+import mesContext from "../../context/meses/mesContext";
 
+import Avatar from "@mui/material/Avatar";
+import logo from "../../logo.png";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
 
 export const NuevoMes = () => {
+  const mesesContext = useContext(mesContext);
+  const { mostrarFormulario, formulario, agregarMes } = mesesContext;
 
-    const mesesContext = useContext(mesContext);
-    const {mostrarFormulario, formulario} = mesesContext;
+  // State para Proyecto
+  const [mes, guardarMes] = useState({
+    id: '',
+    nombreMes: "",
+  });
 
-// State para Proyecto
-const [mes, guardarMes] = useState({
-    nombreMes: ''
-});
+  // Extraer nombre de proyecto
+  const { nombreMes } = mes;
 
-// Extraer nombre de proyecto
-const {nombreMes} = mes;
-
-// Lee los contenidos del input
-const onChangeMes = e => {
+  // Lee los contenidos del input
+  const onChangeMes = (e) => {
     guardarMes({
-        ...mes,
-        [e.target.name] : e.target.value
-    })
-}
+      ...mes,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-// Cuando el usuario envia un proyecto
-const onSubmitMes = e => {
+  // Cuando el usuario envia un proyecto
+  const onSubmitMes = (e) => {
     e.preventDefault();
 
+    
     // // Validar el proyecto
     // if(nombre === '') {
     //     mostrarError();
     //     return;
     // }
 
-    // // agregar al state
-    // agregarProyecto(proyecto)
+    guardarMes({
+        ...mes,
+        ["id"]: '5',
+      });
+
+  
+     // agregar al state
+     agregarMes(mes)
 
     // // Reiniciar el form
     // guardarProyecto({
     //     nombre: ''
     // })
-}
+  };
 
   // Mostrar el formulario
   const onClickFormulario = () => {
@@ -50,32 +62,46 @@ const onSubmitMes = e => {
   };
 
   return (
-    <div>
+    <Box
+      sx={{ display: "column", justifyContent: "center", alignItems: "center" }}
+    >
+      <Avatar
+        alt="LogoMac"
+        src={logo}
+        sx={{
+          m: 4,
+          width: 140,
+          height: 180,
+        }}
+        variant="rounded"
+      />
+
+      <Divider ligth />
       <Button onClick={onClickFormulario}>Nuevo Mes</Button>
-      
-      { formulario ? 
-                    (
-                        <form
 
-                            onSubmit={onSubmitMes}
-                        >
-                            <input 
-                                type="text"
-                                placeholder="Nombre del Mes"
-                                name="nombreMes"
-                                value={nombreMes}
-                                onChange={onChangeMes}
-                            />
+      {formulario ? (
+        <form onSubmit={onSubmitMes}>
+          <Box>
+            <TextField
+              name="nombreMes"
+              label="Mes"
+              type="text"
+              value={nombreMes}
+              onChange={onChangeMes}
+              color="secondary"
+              sx={{ m: 1 }}
+            />
+          </Box>
 
-                            <input 
-                                type="submit"
-                                value="Agregar Mes"
-                            />
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 1, mb:3 }}>
+            <Button type="submit" value="Agregar Mes" variant="contained">
+              Agregar Mes
+            </Button>
+          </Box>
 
-                        </form>
-                ) : null }
-
-
-    </div>
+          
+        </form>
+      ) : null}
+    </Box>
   );
 };

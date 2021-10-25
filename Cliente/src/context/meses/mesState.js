@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import mesContext from './mesContext';
 import mesReducer from './mesReducer';
 
-import { FORMULARIO_MES } from "../../types";
+import { FORMULARIO_MES, AGREGAR_MES } from "../../types";
 
 const MesState = props => {
     const initialState = {
@@ -26,12 +26,23 @@ const MesState = props => {
         })
     }
 
+    const agregarMes = mes => {
+        console.log("mes")
+        console.log(mes)
+        dispatch({
+            type: AGREGAR_MES,
+            payload: mes
+        })
+    }
+
+
     return (
         <mesContext.Provider
             value={{
                 mesesGastos : state.mesesGastos,
                 formulario: state.formulario,
-                mostrarFormulario
+                mostrarFormulario,
+                agregarMes
             }}
         >
             {props.children}

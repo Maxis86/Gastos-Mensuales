@@ -1,2 +1,3 @@
 export const GASTOS_MES = 'GASTOS_MES';
 export const FORMULARIO_MES = 'FORMULARIO_MES'
+export const AGREGAR_MES = 'AGREGAR_MES'
