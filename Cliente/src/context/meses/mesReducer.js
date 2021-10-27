@@ -1,5 +1,6 @@
 import { FORMULARIO_MES, 
-        AGREGAR_MES 
+        AGREGAR_MES,
+        MES_ACTUAL
 } from "../../types";
 
 export default (state, action) => {
@@ -17,7 +18,12 @@ export default (state, action) => {
         mesesGastos: [...state.mesesGastos, action.payload],
         formulario: false,
       };
+    case MES_ACTUAL:
+      return {
+        ...state,
+        mes: state.mesesGastos.filter(mes => mes.id === action.payload )
+      }
     default:
-      break;
+      return state;
   }
 };

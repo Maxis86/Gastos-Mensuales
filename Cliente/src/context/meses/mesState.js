@@ -2,7 +2,10 @@ import React, { useReducer } from 'react';
 import mesContext from './mesContext';
 import mesReducer from './mesReducer';
 
-import { FORMULARIO_MES, AGREGAR_MES } from "../../types";
+import { FORMULARIO_MES, 
+    AGREGAR_MES, 
+    MES_ACTUAL
+    } from "../../types";
 
 const MesState = props => {
     const initialState = {
@@ -12,7 +15,8 @@ const MesState = props => {
                         {id: 3, nombreMes:'Marzo'},
                         {id: 4, nombreMes:'Abril'},
                         ],
-        formulario:false,
+        mes: null,
+        formulario: false,
     }
 
     // Crear dispatch y state
@@ -27,11 +31,19 @@ const MesState = props => {
     }
 
     const agregarMes = mes => {
-        console.log("mes")
-        console.log(mes)
+      
         dispatch({
             type: AGREGAR_MES,
             payload: mes
+        })
+    }
+
+    const mesActual = id =>{
+        console.log("id")
+        console.log(id)
+        dispatch({
+            type:MES_ACTUAL,
+            payload: id
         })
     }
 
@@ -42,7 +54,8 @@ const MesState = props => {
                 mesesGastos : state.mesesGastos,
                 formulario: state.formulario,
                 mostrarFormulario,
-                agregarMes
+                agregarMes,
+                mesActual
             }}
         >
             {props.children}

@@ -43,9 +43,10 @@ export const NuevoMes = () => {
 
     guardarMes({
         ...mes,
-        ["id"]: '5',
+        "id": '5',
       });
 
+      
   
      // agregar al state
      agregarMes(mes)
@@ -76,7 +77,7 @@ export const NuevoMes = () => {
         variant="rounded"
       />
 
-      <Divider ligth />
+      <Divider />
       <Button onClick={onClickFormulario}>Nuevo Mes</Button>
 
       {formulario ? (

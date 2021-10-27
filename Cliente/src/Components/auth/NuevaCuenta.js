@@ -45,15 +45,15 @@ export const NuevaCuenta = () => {
     });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
 
-    //Validar que no haya campos vacios
+  //   //Validar que no haya campos vacios
 
-    //Otras validaciónes del password, que sean iguales
+  //   //Otras validaciónes del password, que sean iguales
 
-    //Pasarlo al Action
-  };
+  //   //Pasarlo al Action
+  // };
 
   return (
     <Box
