@@ -22,6 +22,7 @@ export default (state, action) => {
       return {
         ...state,
         mes: state.mesesGastos.filter(mes => mes.id === action.payload )
+        
       }
     default:
       return state;

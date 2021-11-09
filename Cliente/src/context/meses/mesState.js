@@ -39,12 +39,12 @@ const MesState = props => {
     }
 
     const mesActual = id =>{
-        console.log("id")
-        console.log(id)
+        
         dispatch({
             type:MES_ACTUAL,
             payload: id
         })
+
     }
 
 
@@ -53,6 +53,7 @@ const MesState = props => {
             value={{
                 mesesGastos : state.mesesGastos,
                 formulario: state.formulario,
+                mes: state.mes,
                 mostrarFormulario,
                 agregarMes,
                 mesActual

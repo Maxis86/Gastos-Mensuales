@@ -43,11 +43,10 @@ export const NuevoMes = () => {
 
     guardarMes({
         ...mes,
-        "id": '5',
+        "id": 5,
       });
 
-      
-  
+    
      // agregar al state
      agregarMes(mes)
 

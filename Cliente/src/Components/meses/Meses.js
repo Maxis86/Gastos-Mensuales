@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext} from "react";
+
 
 import { Sidebar } from "../layout/Sidebar";
 import Barra from "../layout/Barra";
@@ -9,9 +10,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 
 export const Meses = () => {
+
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+      
       <Barra />
 
       <Sidebar />
@@ -21,8 +25,12 @@ export const Meses = () => {
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
       >
         <Toolbar />
-        <FormGastos/>
-        <ListadoGastos/>        
+        <FormGastos />
+        <Box sx={{ 
+                        
+                          }}>
+            <ListadoGastos />
+        </Box>
       </Box>
     </Box>
   );

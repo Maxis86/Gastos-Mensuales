@@ -5,7 +5,7 @@ import Drawer from "@mui/material/Drawer";
 import { NuevoMes } from "../meses/NuevoMes";
 import { ListadoMeses } from "../meses/ListadoMeses";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 export const Sidebar = () => {
   return (

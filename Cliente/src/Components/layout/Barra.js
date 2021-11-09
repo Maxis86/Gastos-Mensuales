@@ -1,4 +1,7 @@
-import * as React from "react";
+import React, {useContext} from "react";
+
+import mesContext from '../../context/meses/mesContext'
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,8 +14,12 @@ const drawerWidth = 240;
 
 
 export default function Barra() {
+
+  const mesesContext = useContext(mesContext);
+  const {mes} = mesesContext;
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box >
       <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
@@ -27,9 +34,17 @@ export default function Barra() {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Gastos Mensuales
-          </Typography>
+
+          {mes
+          ?(
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Gastos de {mes[0].nombreMes}
+            </Typography>
+          ):   
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            
+            </Typography>}
+          
           <Button color="inherit">Cerrar sesión</Button>
         </Toolbar>
       </AppBar>
