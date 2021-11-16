@@ -8,19 +8,28 @@ import { Meses } from "./Components/meses/Meses";
 import theme from "./temaconfig";
 import GastoState from "./context/gastos/gastoState";
 import MesState from "./context/meses/mesState";
+import AlertaState from "./context/alertas/alertaState";
+import AuthState from "./context/autentificacion/authState";
 
 function App() {
+
+  console.log(process.env.REACT_APP_BACKEND_URL)
+
   return (
     <ThemeProvider theme={theme}>
       <MesState>
         <GastoState>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/nueva-cuenta" component={NuevaCuenta} />
-              <Route exact path="/meses" component={Meses} />
-            </Switch>
-          </Router>
+          <AlertaState>
+            <AuthState>
+              <Router>
+                <Switch>
+                  <Route exact path="/" component={Login} />
+                  <Route exact path="/nueva-cuenta" component={NuevaCuenta} />
+                  <Route exact path="/meses" component={Meses} />
+                </Switch>
+              </Router>
+            </AuthState>
+          </AlertaState>
         </GastoState>
       </MesState>
     </ThemeProvider>

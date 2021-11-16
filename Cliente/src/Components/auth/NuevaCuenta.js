@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import AlertaContext from '../../context/alertas/alertaContext';
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -23,6 +24,10 @@ const useStyles = makeStyles({
 
 export const NuevaCuenta = () => {
 
+  // extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const {alerta, mostrarAlerta} = alertaContext;
+
   const classes = useStyles();
 
 
@@ -45,15 +50,33 @@ export const NuevaCuenta = () => {
     });
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log('Usuario');
+    console.log(usuario);
 
-  //   //Validar que no haya campos vacios
+    
+    
+    mostrarAlerta('Todos los campostos son obligatorios', 'alerta-error')
+    //Validar que no haya campos vacios
+    if(nombre.trim() === '' || email.trim() === '' || password.trim() === '' || confirmar.trim() === ''){
+        mostrarAlerta('Todos los campostos son obligatorios', 'alerta-error')
+        return
+    }
 
-  //   //Otras validaciónes del password, que sean iguales
+    //Password minimo de 5 caracteres
+    if(password.length <6){
+      mostrarAlerta('El password debe ser por lo menos de 6 caracteres')
+      return
+    }
 
-  //   //Pasarlo al Action
-  // };
+    //Otras validaciónes del password, que sean iguales
+    if(password !== confirmar){
+      mostrarAlerta('Los passwords no son iguales')
+    }
+
+    //Pasarlo al Action
+  }
 
   return (
     <Box
@@ -74,13 +97,17 @@ export const NuevaCuenta = () => {
       noValidate
       autoComplete="off"
     >
+      {alerta ? ( <div>{alerta.msg}</div>) : null}
+
       <AccountCircleIcon color="primary" sx={{ fontSize: 150 }} />
 
       <Typography variant="h2" color="secundary" aling="center" paragraph>
         Registrarse
       </Typography>
 
-      <form>
+      <form
+        //onSubmit={onSubmit}
+        >
         <div style={{ width: "100%" }}>
           <TextField
             name="nombre"
@@ -162,7 +189,7 @@ export const NuevaCuenta = () => {
         </div>
 
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button type="submit" value="Iniciar Sesión" variant="contained">
+          <Button type="submit" value="Iniciar Sesión" variant="contained" onClick={onSubmit}>
             Iniciar Sesión
           </Button>
         </Box>
