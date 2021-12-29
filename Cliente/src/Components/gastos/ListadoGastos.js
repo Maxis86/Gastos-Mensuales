@@ -1,26 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
 import gastoContext from "../../context/gastos/gastoContext";
 import mesContext from '../../context/meses/mesContext'
 import { Gasto } from "./Gasto";
 import { useContext } from "react";
 
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+
+import Button from "@mui/material/Button";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+
 import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
-import Button from '@mui/material/Button';
+
 
 export const ListadoGastos = () => {
   const gastosContext = useContext(gastoContext);
   const { gastosMes } = gastosContext;
 
   const mesesContext = useContext (mesContext);
-  const {mes} = mesesContext;
+  const {mes, eliminarMes} = mesesContext;
+
+  // useEffect(() => {
+    
+  // }, [mes])
+
+  const onClieckEliminarProyecto = () => {
+ 
+    eliminarMes(mes[0]._id);
+  }
 
   if( mes === null ) {
     return null
@@ -114,6 +120,9 @@ export const ListadoGastos = () => {
       {gastosMes.map((gasto) => (
         <Gasto key={gasto.id} gasto={gasto} />
       ))}
+
+
+      <Button color="inherit" onClick= {() => onClieckEliminarProyecto() }>Eliminar Proyecto</Button>
     </div>
   );
 };

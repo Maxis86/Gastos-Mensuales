@@ -6,8 +6,13 @@ const TareaSchema = mongoose.Schema({
         required: true,
         trim: true
     },
+    precio: {
+        type: String,
+        required: true,
+        trim: true
+    },
     estado: {
-        type: Boolean,
+        type: String,
         default: false
     },
     creado : {

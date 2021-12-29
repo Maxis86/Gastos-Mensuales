@@ -15,12 +15,11 @@ export const NuevoMes = () => {
 
   // State para Proyecto
   const [mes, guardarMes] = useState({
-    id: '',
-    nombreMes: "",
+    nombre: ''
   });
 
   // Extraer nombre de proyecto
-  const { nombreMes } = mes;
+  const { nombre } = mes;
 
   // Lee los contenidos del input
   const onChangeMes = (e) => {
@@ -41,10 +40,10 @@ export const NuevoMes = () => {
     //     return;
     // }
 
-    guardarMes({
-        ...mes,
-        "id": 5,
-      });
+    // guardarMes({
+    //     ...mes,
+    //     "id": 5,
+    //   });
 
     
      // agregar al state
@@ -83,10 +82,10 @@ export const NuevoMes = () => {
         <form onSubmit={onSubmitMes}>
           <Box>
             <TextField
-              name="nombreMes"
+              name="nombre"
               label="Mes"
               type="text"
-              value={nombreMes}
+              value={nombre}
               onChange={onChangeMes}
               color="secondary"
               sx={{ m: 1 }}

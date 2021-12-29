@@ -1,6 +1,7 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 
 import mesContext from '../../context/meses/mesContext'
+import authContext from "../../context/autentificacion/authContext";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,8 +16,17 @@ const drawerWidth = 240;
 
 export default function Barra() {
 
+
+//Extraer información de autenticación
+  const authContexts = useContext(authContext)
+  const {usuarioAutenticado, usuario, cerrarSesion} = authContexts;
+
   const mesesContext = useContext(mesContext);
   const {mes} = mesesContext;
+
+  useEffect(() => {
+    usuarioAutenticado();
+  }, [])
 
   return (
     <Box >
@@ -25,6 +35,7 @@ export default function Barra() {
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
+          {usuario ? <Button color="inherit">Hola {usuario.nombre}</Button> : null}
           {/* <IconButton
             size="large"
             edge="start"
@@ -38,14 +49,14 @@ export default function Barra() {
           {mes
           ?(
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Gastos de {mes[0].nombreMes}
+            Gastos de {mes[0].nombre}
             </Typography>
           ):   
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             
             </Typography>}
           
-          <Button color="inherit">Cerrar sesión</Button>
+          <Button color="inherit" onClick= {() => cerrarSesion() } >Cerrar sesión</Button>
         </Toolbar>
       </AppBar>
     </Box>

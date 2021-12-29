@@ -27,8 +27,8 @@ export const Mes = ({ mes }) => {
     <div>
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={()=>selecionarMes(mes.id)}>
-            <ListItemText primary={mes.nombreMes} />
+          <ListItemButton onClick={()=>selecionarMes(mes._id)}>
+            <ListItemText primary={mes.nombre} />
           </ListItemButton>
         </ListItem>
         

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import gastoContext from "../../context/gastos/gastoContext";
+import mesContext from '../../context/meses/mesContext'
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -10,12 +11,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {IconButton, Modal, TextField} from '@mui/material'
+import { Modal, TextField} from '@mui/material'
 
 export const Gasto = ({ gasto }) => {
 
   const gastosContext = useContext(gastoContext);
   const { eliminarGasto, obtenerGastos, editarGasto, cambiarEstado } = gastosContext;
+
+  const mesesContext = useContext (mesContext);
+  const {mes} = mesesContext;
+
 
   const [open, setOpen] = React.useState(false);
 
@@ -40,7 +45,8 @@ export const Gasto = ({ gasto }) => {
   }
 
   const deleteGasto = () => {
-    eliminarGasto(gasto.id);
+
+    eliminarGasto(gasto._id, mes[0]._id);
 
     obtenerGastos(gasto.mesid);
   };

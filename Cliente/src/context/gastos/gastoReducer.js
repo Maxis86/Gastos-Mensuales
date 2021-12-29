@@ -7,10 +7,14 @@ import { GASTOS_MES,
   CAMBIAR_ESTADO_GASTO
 } from "../../types";
 
-export default (state, action) => {
+const gastoReducer = (state, action) => {
   switch (action.type) {
     case GASTOS_MES:
-      break;
+      return {
+        ...state,
+        gastosMes: action.payload
+      }
+      
     case OBTENER_GASTO:
       return {
         ...state,
@@ -29,19 +33,17 @@ export default (state, action) => {
       case ELIMINAR_GASTO:
         return {
           ...state,
-          gastosMeses: state.gastosMeses.filter((gasto) => gasto.id !== action.payload),
+          gastosMes: state.gastosMes.filter((gasto) => gasto._id !== action.payload),
         }
       case EDITAR_GASTO:
-        return {
-          ...state,
-          gastosMeses: state.gastosMeses.map(gasto => gasto.id === action.payload.id ? action.payload : gasto )
-        }
       case CAMBIAR_ESTADO_GASTO:
         return {
           ...state,
-          gastosMeses: state.gastosMeses.map(gasto => gasto.id === action.payload.id ? action.payload : gasto )
+          gastosMeses: state.gastosMeses.map(gasto => gasto._id === action.payload._id ? action.payload : gasto )
         }
     default:
       return state;
   }
 };
+
+export default gastoReducer;

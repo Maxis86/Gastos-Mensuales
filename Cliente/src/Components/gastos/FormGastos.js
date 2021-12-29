@@ -12,20 +12,25 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 export const FormGastos = () => {
 
     const gastosContext = useContext (gastoContex);
-    const {gastosMes, agregarGasto, obtenerGastos} = gastosContext;
+    const { agregarGasto, obtenerGastos} = gastosContext;
     
     const mesesContext = useContext (mesContext);
     const {mes} = mesesContext;
 
-    const [gasto, nuevoGasto] = useState({
-      id: '', 
-      nombre:'', 
-      precio:'', 
-      estado:'Adeuda',
-      mesid: ''
-    });
+    const [open, setOpen] = React.useState(false);
 
-    const {nombre, precio} = gasto;
+    // State del formulario
+    const [tarea, guardarTarea] = useState({
+      nombre: '',
+      precio: ''
+  })
+
+  
+    // extraer el nombre del proyecto
+    const { nombre, precio } = tarea;
+
+    // Si no hay proyecto seleccionado
+    if(!mes) return null;
 
     const agregarTarea =() => {
       // mostrarFormGasto();
@@ -33,27 +38,24 @@ export const FormGastos = () => {
     }
 
     const onChange =(e) => {
-      nuevoGasto({
-        ...gasto,
+      guardarTarea({
+        ...tarea,
         [e.target.name]: e.target.value,
       });
 
       
     }
 
-    const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => { 
       
       setOpen(true);
 
-      const numAleatorio = uuidv4();
-      const idMesActual = mes[0].id;
+      const idMesActual = mes[0]._id;
       
-      nuevoGasto({
-        ...gasto,
-        id: numAleatorio,
-        mesid: idMesActual
+      guardarTarea({
+        ...tarea,
+        proyecto: idMesActual
       });}
 
     const handleClose = () => setOpen(false);
@@ -61,7 +63,7 @@ export const FormGastos = () => {
     const onSubmitGasto = (e) => {
       e.preventDefault();
 
-      agregarGasto(gasto);  
+      agregarGasto(tarea);  
       obtenerGastos(mes[0].id)
 
       handleClose();

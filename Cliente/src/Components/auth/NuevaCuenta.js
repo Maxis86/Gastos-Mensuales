@@ -1,6 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AlertaContext from '../../context/alertas/alertaContext';
+import AuthContext from "../../context/autentificacion/authContext";
+
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -22,11 +24,30 @@ const useStyles = makeStyles({
   },
 });
 
-export const NuevaCuenta = () => {
+export const NuevaCuenta = (props) => {
 
   // extraer los valores del context
   const alertaContext = useContext(AlertaContext);
   const {alerta, mostrarAlerta} = alertaContext;
+
+  const authContext = useContext(AuthContext);
+  const {mensaje, autenticado, registrarUsuario} = authContext;
+
+  //En caso de que el usuario se haya autenticado, o registrado o sea un registro duplicado
+
+  useEffect(() => {
+    
+    if(autenticado) {
+      
+        props.history.push('/meses');
+    }
+
+    if(mensaje) {
+      
+      mostrarAlerta(mensaje, mensaje.categoria);
+    }
+    // eslint-disable-next-line
+}, [mensaje, autenticado, props.history]);
 
   const classes = useStyles();
 
@@ -52,12 +73,7 @@ export const NuevaCuenta = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('Usuario');
-    console.log(usuario);
-
-    
-    
-    mostrarAlerta('Todos los campostos son obligatorios', 'alerta-error')
+  
     //Validar que no haya campos vacios
     if(nombre.trim() === '' || email.trim() === '' || password.trim() === '' || confirmar.trim() === ''){
         mostrarAlerta('Todos los campostos son obligatorios', 'alerta-error')
@@ -73,9 +89,15 @@ export const NuevaCuenta = () => {
     //Otras validaciónes del password, que sean iguales
     if(password !== confirmar){
       mostrarAlerta('Los passwords no son iguales')
+      return
     }
 
     //Pasarlo al Action
+    registrarUsuario({
+      nombre, 
+      email, 
+      password
+    });
   }
 
   return (
@@ -105,7 +127,7 @@ export const NuevaCuenta = () => {
         Registrarse
       </Typography>
 
-      <form
+      <div
         //onSubmit={onSubmit}
         >
         <div style={{ width: "100%" }}>
@@ -190,10 +212,10 @@ export const NuevaCuenta = () => {
 
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button type="submit" value="Iniciar Sesión" variant="contained" onClick={onSubmit}>
-            Iniciar Sesión
+            Registrarme
           </Button>
         </Box>
-      </form>
+      </div>
 
       <Link to={"/"} className={classes.root}>Ir a Logín</Link>
     </Box>

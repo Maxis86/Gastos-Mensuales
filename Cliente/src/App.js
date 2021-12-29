@@ -10,10 +10,17 @@ import GastoState from "./context/gastos/gastoState";
 import MesState from "./context/meses/mesState";
 import AlertaState from "./context/alertas/alertaState";
 import AuthState from "./context/autentificacion/authState";
+import tokenAuth from "./config/token";
+import RutaPrivada from "./Components/rutas/RutaPrivada";
+
+
+//Revisar si tenemos un token
+const token = localStorage.getItem('token');
+if(token){
+  tokenAuth(token);
+}
 
 function App() {
-
-  console.log(process.env.REACT_APP_BACKEND_URL)
 
   return (
     <ThemeProvider theme={theme}>
@@ -25,7 +32,7 @@ function App() {
                 <Switch>
                   <Route exact path="/" component={Login} />
                   <Route exact path="/nueva-cuenta" component={NuevaCuenta} />
-                  <Route exact path="/meses" component={Meses} />
+                  <RutaPrivada exact path="/meses" component={Meses} />
                 </Switch>
               </Router>
             </AuthState>

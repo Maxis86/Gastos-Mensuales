@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 
 
 import { Sidebar } from "../layout/Sidebar";
@@ -8,9 +8,20 @@ import { ListadoGastos } from "../gastos/ListadoGastos";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
+import authContext from "../../context/autentificacion/authContext";
+
 
 export const Meses = () => {
 
+  //Extraer información de autenticación
+  const authContexts = useContext(authContext)
+  const {usuarioAutenticado} = authContexts;
+
+  useEffect(() => {
+    usuarioAutenticado()
+
+  }, [])
+ 
 
   return (
     <Box sx={{ display: "flex" }}>

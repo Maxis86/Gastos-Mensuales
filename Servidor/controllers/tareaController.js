@@ -5,6 +5,7 @@ const { validationResult } = require('express-validator');
 // Crea una nueva tarea
 exports.crearTarea = async (req, res) => {
 
+ 
     // Revisar si hay errores
     const errores = validationResult(req);
     if( !errores.isEmpty() ) {
@@ -91,7 +92,7 @@ exports.actualizarTarea = async (req, res ) => {
         // Crear un objeto con la nueva información
         const nuevaTarea = {};
         nuevaTarea.nombre = nombre;
-        nuevaTarea.estado = estado;
+        nuevaTarea.estado = "estado";
 
         // Guardar la tarea
         tarea = await Tarea.findOneAndUpdate({_id : req.params.id }, nuevaTarea, { new: true } );
