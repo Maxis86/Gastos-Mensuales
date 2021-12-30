@@ -13,7 +13,7 @@ const TareaSchema = mongoose.Schema({
     },
     estado: {
         type: String,
-        default: false
+        default: 'Adeuda'
     },
     creado : {
         type: Date,

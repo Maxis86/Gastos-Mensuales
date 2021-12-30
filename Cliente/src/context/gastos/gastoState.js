@@ -14,14 +14,6 @@ import {
 
 const GastoState = props => {
     const initialState = {
-        // gastosMeses: [
-        //                 {id: 1, nombre:'Seguro', precio:'$2500', estado:'Adeuda', mesid: 1},
-        //                 {id: 2, nombre:'Ingles', precio:'$3400', estado:'Adeuda', mesid: 2},
-        //                 {id: 3, nombre:'Patente', precio:'$9300', estado:'Adeuda',  mesid: 3},
-        //                 {id: 4, nombre:'Expensas', precio:'$5400', estado:'Adeuda',  mesid: 2},
-        //                 {id: 5, nombre:'Luz', precio:'$1200', estado:'Adeuda',  mesid: 1},
-        //                 {id: 6, nombre:'Gas', precio:'$385', estado:'Adeuda',  mesid: 4},
-        //                 ],
         gastosMeses: [],
         gastosMes: [],
         mostrarForm: false,
@@ -78,18 +70,24 @@ const GastoState = props => {
         }
     }
 
-    const editarGasto = (gasto) => {
-        dispatch({
-            type: EDITAR_GASTO,
-            payload: gasto
-        })
+    const editarGasto = async (gasto) => {
+ 
+        try {
+            const resultado = await clienteAxios.put(`/api/tareas/${gasto.id}`, gasto);
+
+            dispatch({
+                type: CAMBIAR_ESTADO_GASTO,
+                payload: resultado.data.tarea
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const cambiarEstado = async (gasto) => {
+
         try {
             const resultado = await clienteAxios.put(`/api/tareas/${gasto._id}`, gasto);
-            console.log('resultado');
-            console.log(resultado);
             
             dispatch({
                 type: CAMBIAR_ESTADO_GASTO,

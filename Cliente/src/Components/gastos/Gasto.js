@@ -29,7 +29,7 @@ export const Gasto = ({ gasto }) => {
     nombre:'', 
     precio:'', 
     estado:'Adeuda',
-    mesid: ''
+    proyecto: ''
   });
 
   const {nombre, precio} = gastoEdit;
@@ -48,16 +48,16 @@ export const Gasto = ({ gasto }) => {
 
     eliminarGasto(gasto._id, mes[0]._id);
 
-    obtenerGastos(gasto.mesid);
+    obtenerGastos(gasto.proyecto);
   };
 
   const editGasto = () => {
     setOpen(true);
     nuevoGasto({
       ...gastoEdit,
-      'id': gasto.id,
-      estado: gasto.estado,
-      'mesid': gasto.mesid
+      'id': gasto._id,
+      'estado': gasto.estado,
+      'proyecto': gasto.proyecto
     });
   };
 
@@ -74,15 +74,17 @@ export const Gasto = ({ gasto }) => {
       nombre:'', 
       precio:'', 
       estado:'Adeuda',
-      mesid: '',
+      proyecto: '',
       
     });
-    obtenerGastos(gasto.mesid)
-    handleClose();
 
+    handleClose();
+    obtenerGastos(gasto.proyecto);
   };
 
   const onClickEstado = () => {
+    console.log("gasto")
+    console.log(gasto)
 
     if (gasto.estado === 'Adeuda') {
       gasto.estado = 'Pagado';
@@ -91,7 +93,7 @@ export const Gasto = ({ gasto }) => {
     }
     cambiarEstado(gasto);
    
-    obtenerGastos(gasto.mesid)
+    obtenerGastos(gasto.proyecto)
   }
 
   const style = {

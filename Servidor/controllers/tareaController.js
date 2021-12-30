@@ -28,6 +28,10 @@ exports.crearTarea = async (req, res) => {
             return res.status(401).json({msg: 'No Autorizado'});
         }
 
+        console.log("req.body")
+
+        console.log(req.body)
+
         // Creamos la tarea
         const tarea = new Tarea(req.body);
         await tarea.save();
@@ -72,9 +76,8 @@ exports.obtenerTareas = async (req, res) => {
 exports.actualizarTarea = async (req, res ) => {
     try {
         // Extraer el proyecto y comprobar si existe
-        const { proyecto, nombre, estado } = req.body;
-
-
+        const { proyecto, nombre, estado, precio } = req.body;
+        
         // Si la tarea existe o no
         let tarea = await Tarea.findById(req.params.id);
 
@@ -92,7 +95,9 @@ exports.actualizarTarea = async (req, res ) => {
         // Crear un objeto con la nueva información
         const nuevaTarea = {};
         nuevaTarea.nombre = nombre;
-        nuevaTarea.estado = "estado";
+        nuevaTarea.estado = estado;
+        nuevaTarea.precio = precio;
+        
 
         // Guardar la tarea
         tarea = await Tarea.findOneAndUpdate({_id : req.params.id }, nuevaTarea, { new: true } );
